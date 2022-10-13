@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>유저 정보</h1>  
+  <p>유저 이름: <b>{{ person.first_name }}</b> </p>
+  <p>성: {{ person.last_name }} </p>
+  <p>나이:  {{ person.age }} </p>
+  <p>지역:  {{ person.country }} </p>
+  <p>번호: {{ person.phone }} </p>
+  <p>잔고:  {{ person.balance }} </p>
+  
+  <a href = "{% url 'users:club_signup' person.pk %}"> 동아리 가입하기 </a>
+  
+  <br>
+  <a href="{% url 'users:index' %}">back</a>
+  
+  <hr>
+  <h2>가입된 동아리 목록</h2>
+  {% for club in person.clubs.all %}
+    <a href = "{% url 'clubs:detail' club.pk %}">
+      <p> {{ club }} </p>
+    </a>
+  {% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>동아리 가입하기</h1>
+  <form method = "POST">
+    {% csrf_token %}
+
+    <select name="club">
+      {% for club in clubs %}
+        <option value = "{{ club.pk }}">{{ club }}</option>
+      {% endfor %}
+
+    </select>
+
+    <input type="submit" value= "가입하기">
+
+  </form>
+
+
+
+{% endblock content %}

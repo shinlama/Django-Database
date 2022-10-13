@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>DETAIL</h2>
+  {{ club.image }}
+  {% if club.image %}
+    <img src="{{ club.image.url }}" width="200px">
+  {% endif %}
+  <h3>{{ club.pk }} 번째 글</h3>
+  <hr>
+  <p>제목 : {{ club.title }}</p>
+  <p>내용 : {{ club.content }}</p>
+  <p>작성시각 : {{ club.created_at }}</p>
+  <p>수정시각 : {{ club.updated_at }}</p>
+  <hr>
+
+  <a href="{% url 'clubs:update' club.pk %}">[UPDATE]</a>
+  <form action="{% url 'clubs:delete' club.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="DELETE">
+  </form>
+  <a href="{% url 'clubs:index' %}">[back]</a>
+  <hr>
+ 
+  <h2> 가입된 회원 목록 </h2>
+  {% for user in club.users.all %}
+    <a href = "{% url 'users:profile' user.pk %}">
+      <p> {{ user.first_name }} </p>
+    </a>
+  {% endfor %}
+
+{% endblock content %}

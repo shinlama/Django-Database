@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>동아리 LIST</h1>
+
+  {% for club in clubs %}
+    <p>동아리 번호 : {{ club.pk }}</p>
+    <p>동아리 제목 : {{ club.title }}</p>
+  
+    <a href="{% url 'clubs:detail' club.pk %}">[DETAIL]</a>
+    <hr>
+  {% endfor %}
+  
+{% endblock content %}

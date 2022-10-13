@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>고객 DB</h1>
+  {% comment %} 중복되는 부분 파악 중요 {% endcomment %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">이름</th>
+        <th scope="col">성</th>
+        <th scope="col">나이</th>
+        <th scope="col">지역</th>
+        <th scope="col">번호</th>
+        <th scope="col">잔고</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <th scope="row">{{user.pk}}</th>
+        <td><a href="{% url 'users:profile' user.pk %}"> {{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.age}}</td>
+        <td>{{user.country}}</td>
+        <td>{{user.phone}}</td>
+        <td>{{user.balance}}</td>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+  <form class="mb=5" method="GET"> 
+
+    <select name="selected_type">
+      <option value="first_name" selected>이름</option>
+      <option value="country">지역</option>
+    </select>
+
+    <input name="search">
+    <input types="submit" value="검색하기">
+
+  </form>
+
+  
+{% endblock content %}
