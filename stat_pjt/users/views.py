@@ -32,7 +32,7 @@ def user_list(request):
             return Response(serializer.data)
 
 @api_view(['GET', 'DELETE', 'PUT'])
-def user_detail(request, user_pk):+
+def user_detail(request, user_pk):
     user = get_object_or_404(User, pk=user_pk)
 
     if request.method == 'GET':
@@ -50,3 +50,17 @@ def user_detail(request, user_pk):+
             'success':True,
         }
         return Response(data)
+
+@api_view(['POST'])
+def user_club(request, user_pk):
+    user = get_object_or_404(User, pk= user_pk)
+
+    if request.method == 'POST':
+        print(request.data.get('club'))
+        club = request.data.get('club')
+        user.clubs.add(club)
+        data = {
+            'success': True
+        }
+        return Response(data)
+
